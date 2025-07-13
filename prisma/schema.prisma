@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int              @id @default(autoincrement())
+  email          String           @unique
+  password       String
+  name           String
+  role           Role             @default(USER) // USER o ADMIN
+  phone          String?
+  address        String?
+  idNumber       String?          // cédula o ID
+  accountType    String?          // ejemplo: ahorro, corriente
+  accountNumber  String?          @unique
+  accountStatus  String?          // activa, inactiva, bloqueada
+  balance        Float            @default(0)
+  transactions   Transaction[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Transaction {
+  id             Int      @id @default(autoincrement())
+  orderNumber    String   @unique
+  date           DateTime
+  description    String
+  amount         Float
+  type           TransactionType
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
