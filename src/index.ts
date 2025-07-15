@@ -14,7 +14,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 
 app.get('/', (req, res) => {
-  res.send('API de Atlas Financial Bank funcionando ✅')
+  res.send('API de Vault Financial Bank funcionando ✅')
 })
 
 app.use('/api/admin', adminRoutes)

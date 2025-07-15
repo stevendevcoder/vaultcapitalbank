@@ -18,7 +18,7 @@ async function main() {
     data: {
       email: adminEmail,
       password: hashed,
-      name: 'Administrador Atlas',
+      name: 'Administrador Vault',
       role: 'ADMIN',
     },
   })
