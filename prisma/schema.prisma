@@ -26,6 +26,11 @@ model User {
   transactions   Transaction[]
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
+  
+  // Relación con administrador (solo para usuarios normales)
+  adminId        Int?             // ID del administrador asignado
+  admin          User?            @relation("AdminUsers", fields: [adminId], references: [id])
+  assignedUsers  User[]           @relation("AdminUsers") // Usuarios asignados a este admin
 }
 
 model Transaction {

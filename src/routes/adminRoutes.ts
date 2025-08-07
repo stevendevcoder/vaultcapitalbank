@@ -9,6 +9,7 @@ import {
     getTransactionById,
     updateTransaction,
     deleteTransaction,
+    getAdminStats,
   } from "../controllers/adminController";
   import { verifyToken } from "../middlewares/authMiddleware";
   import { isAdmin } from "../middlewares/isAdmin";
@@ -16,6 +17,9 @@ import {
 const router = Router();
 
 router.use(verifyToken, isAdmin);
+
+// Nueva ruta para estadísticas del administrador
+router.get('/stats', getAdminStats)
 
 router.get('/users', getAllUsers)
 router.post('/users', createUser)
